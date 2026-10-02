@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MailWatch</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>MailWatch</h1>
+    <div class="status-row">
+      <span id="conn-dot" class="dot" data-state="connecting"></span>
+      <span id="conn-text">connecting to server…</span>
+      <button id="btn-setup" class="ghost hidden">Setup</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="setup-panel" class="card hidden">
+      <h2>Configure MailWatch</h2>
+      <p class="muted">
+        Enter the Gmail account to watch and your Gemini key. Sender rules are case-insensitive:
+        <code>name@domain.com</code> matches one person, <code>@domain.com</code> matches everyone at that domain.
+      </p>
+      <form id="setup-form">
+        <label>Gmail address
+          <input id="s-user" name="gmailUser" type="email" required placeholder="you@college.edu" />
+        </label>
+        <label>Gmail app password
+          <input id="s-pass" name="gmailAppPassword" type="password" required placeholder="16-character app password" autocomplete="new-password" />
+        </label>
+        <label>Watched senders (one per line)
+          <textarea id="s-senders" name="watchSenders" required rows="4" placeholder="@rmkec.ac.in"></textarea>
+        </label>
+        <label>Gemini API key (leave blank to skip AI summaries)
+          <input id="s-gemini" name="geminiApiKey" type="password" autocomplete="new-password" />
+        </label>
+        <div class="grid2">
+          <label>IMAP host
+            <input id="s-host" name="imapHost" type="text" value="imap.gmail.com" />
+          </label>
+          <label>IMAP port
+            <input id="s-port" name="imapPort" type="number" value="993" min="1" max="65535" />
+          </label>
+        </div>
+        <label class="grid2-inline">
+          <span>Poll every <input id="s-poll" name="pollIntervalSeconds" type="number" value="30" min="15" /> seconds</span>
+        </label>
+        <div id="setup-msg"></div>
+        <div class="actions">
+          <button id="btn-setup-save" type="submit" class="primary">Test &amp; save</button>
+          <button id="btn-setup-cancel" type="button" class="ghost">Cancel</button>
+        </div>
+      </form>
+      <p class="muted small">
+        Your credentials stay on this PC in <code>.env</code>. On save, MailWatch tests the Gmail login,
+        saves everything, registers itself to auto-start in the background, and restarts.
+      </p>
+    </section>
+
+    <section class="controls">
+      <div class="watchers">
+        <strong>Watching</strong>
+        <span id="watch-user"></span>
+        <ul id="watch-senders"></ul>
+      </div>
+      <div class="actions">
+        <button id="btn-test" class="ghost">Test notification</button>
+        <button id="btn-poll" class="ghost">Check now</button>
+      </div>
+    </section>
+
+    <section>
+      <div id="last-check" class="muted"></div>
+      <ul id="alerts" class="alerts"></ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

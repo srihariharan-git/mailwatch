@@ -1,0 +1,6 @@
+node_modules/
+.env
+*.log
+alerts.json
+seen-state.json
+.DS_Store

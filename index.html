@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MailWatch — AI email alerts for your inbox</title>
+  <meta name="description" content="Watch any email inbox (Gmail/college). Know the moment a sender emails you — instant Windows desktop toast with an AI summary. Free, open-source, runs on your own PC." />
+  <style>
+    :root {
+      --bg: #0f1115; --panel: #171a21; --border: #262b35;
+      --text: #e6e9ef; --muted: #8b93a3; --accent: #4f8cff; --green: #3fb97f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+    }
+    main { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+    header { text-align: center; padding-bottom: 32px; }
+    h1 { font-size: 40px; margin: 0 0 8px; }
+    .tagline { color: var(--muted); font-size: 18px; margin: 0; }
+    .badge {
+      display: inline-block; margin-top: 14px; background: var(--panel);
+      border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px;
+      font-size: 12px; color: var(--green);
+    }
+    .cta {
+      display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+      margin-top: 26px;
+    }
+    .btn {
+      text-decoration: none; display: inline-block; padding: 13px 22px;
+      border-radius: 10px; font-weight: 600; font-size: 15px;
+    }
+    .btn-main { background: var(--accent); color: #fff; }
+    .btn-main:hover { filter: brightness(1.1); }
+    .btn-ghost { border: 1px solid var(--border); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--accent); }
+    .section {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px; margin-top: 28px;
+    }
+    .section h2 { margin: 0 0 10px; font-size: 20px; }
+    .section p { color: var(--text); margin: 0 0 8px; font-size: 15px; }
+    .muted { color: var(--muted); font-size: 13px; }
+    code {
+      background: var(--bg); border: 1px solid var(--border); padding: 2px 7px;
+      border-radius: 6px; font-size: 13px;
+    }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin-bottom: 6px; font-size: 15px; }
+    .steps { counter-reset: step; list-style: none; padding: 0; }
+    .steps li {
+      counter-increment: step; position: relative; padding-left: 40px;
+      margin-bottom: 14px; font-size: 15px;
+    }
+    .steps li::before {
+      content: counter(step); position: absolute; left: 0; top: 2px;
+      width: 26px; height: 26px; border-radius: 50%; background: var(--accent);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+    }
+    footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 40px; }
+    footer a { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>MailWatch</h1>
+      <p class="tagline">Never miss an important email again.</p>
+      <div class="badge">works with Gmail &amp; any IMAP inbox</div>
+      <div class="cta">
+        <a class="btn btn-main" href="https://github.com/srihariharan-git/mailwatch/archive/refs/heads/main.zip">Download ZIP</a>
+        <a class="btn btn-ghost" href="https://github.com/srihariharan-git/mailwatch">View on GitHub</a>
+      </div>
+    </header>
+
+    <div class="section">
+      <h2>What it does</h2>
+      <p><strong>MailWatch</strong> watches your email inbox — Gmail, Office 365, or any college account — and the moment a sender you care about emails you, it pops a <strong>Windows desktop notification</strong> with an <strong>AI-written summary</strong> of the email.</p>
+      <ul>
+        <li>Instant toasts — no browser tab needs to stay open</li>
+        <li>Gemini AI summarizes each email in one line</li>
+        <li>You choose exactly who triggers alerts: <code>boss@company.com</code> or <code>@company.com</code></li>
+        <li>Runs quietly in the background, auto-starts on login</li>
+        <li>Your credentials never leave your own PC</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Set up in one minute</h2>
+      <ol class="steps">
+        <li>Download the ZIP and extract it. <span class="muted">(No GitHub account needed.)</span></li>
+        <li>Need <a href="https://nodejs.org">Node.js</a> (v18+) — install if you don't have it.</li>
+        <li>In the folder, run <code>npm install</code> then <code>npm start</code>.</li>
+        <li>Open <code>http://localhost:3000</code> — a setup form greets you. Enter your email, your Gmail <em>app password</em> (create one at <code>myaccount.google.com/apppasswords</code>), and an optional Gemini API key (<code>aistudio.google.com/apikey</code>).</li>
+        <li>Click <strong>Test &amp; save</strong> — done. MailWatch validates your login, installs itself to auto-start, and begins watching.</li>
+      </ol>
+      <p class="muted">Free and open-source. No cloud account, no subscription, no data collected.</p>
+    </div>
+
+    <div class="section">
+      <h2>Why run it yourself?</h2>
+      <p>Unlike email apps that upload your whole mailbox to a server, MailWatch runs entirely on <strong>your</strong> machine. Your password stays in a local <code>.env</code> file, and the only thing sent anywhere is the text of one email — to Google's Gemini — when you've opted in to summaries.</p>
+    </div>
+
+    <footer>
+      Open source · Built by a student · <a href="https://github.com/srihariharan-git/mailwatch">Star &amp; share the repo</a>
+    </footer>
+  </main>
+</body>
+</html>
